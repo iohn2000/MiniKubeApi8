@@ -1,0 +1,6 @@
+@MiniKubeApi8_HostAddress = http://localhost:5241
+
+GET {{MiniKubeApi8_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

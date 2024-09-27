@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-minikube-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-minikube-api
+  template:
+    metadata:
+      labels:
+        app: my-minikube-api
+    spec:
+      containers:
+      - name: my-minikube-api
+        image: localhost:5000/my-minikube-api-image
+        ports:
+        - containerPort: 80
