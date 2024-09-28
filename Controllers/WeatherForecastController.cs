@@ -29,5 +29,11 @@ namespace MiniKubeApi8.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("snow",Name ="GetSnow")]
+        public string GetSnow()
+        {
+            return "snow is falling at: " + DateTime.Now.ToString();
+        }
     }
 }
