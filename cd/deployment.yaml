@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-minikube-api-deployment
+  annotations:
+    version: "v1.2.0.0 with snow"
 spec:
   replicas: 1
   selector:
