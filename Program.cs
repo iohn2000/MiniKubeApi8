@@ -6,6 +6,14 @@ namespace MiniKubeApi8
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            
+            /*
+            var env = builder.Environment;
+            builder.Configuration
+                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                    .AddEnvironmentVariables();
+            */
 
             // Add services to the container.
 
@@ -31,6 +39,7 @@ namespace MiniKubeApi8
             app.MapControllers();
 
             app.Run();
+            Console.WriteLine("");
         }
     }
 }

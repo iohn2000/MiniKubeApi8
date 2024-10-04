@@ -12,7 +12,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <Content Remove="tmp\appsettings.Uat.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +25,12 @@
 
   <ItemGroup>
     <Folder Include="cd\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="tmp\appsettings.Uat.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

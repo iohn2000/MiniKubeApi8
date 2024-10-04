@@ -1,12 +1,8 @@
-# Default values for helm.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
 replicaCount: 1
 
 image:
   repository: localhost:5000/mykube-img
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
@@ -15,12 +11,17 @@ nameOverride: ""
 fullnameOverride: ""
 
 service:
-  type: NodePort #ClusterIP
-  port: 80
+  type: ClusterIP
+  servicePort: 80                  # service will listen on this port (ingress setting backend:service:port:number has to match)
+  # targetPort = weatherPod.podPort  # service will forward traffice to this port for to a pod
+
+weatherPod:
+  podPort: 8080 # pod will listen on this port for incoming traffic (service:targetPort nees to match)
 
 ingress:
   enabled: true
   className: nginx
+  # backend:service:port:number = service.servicePort # ingress will forward traffice to a service with this port
   
   annotations: 
    nginx.ingress.kubernetes.io/rewrite-target: /
