@@ -1,22 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace MiniKubeApi8.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController(ILogger<WeatherForecastController> logger, IConfiguration configuration) : ControllerBase
     {
+        
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
-
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
-        {
-            _logger = logger;
-        }
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
@@ -33,7 +28,20 @@ namespace MiniKubeApi8.Controllers
         [HttpGet("snow",Name ="GetSnow")]
         public string GetSnow()
         {
+            logger.LogDebug("something to debug...");
             return "snow is falling at: " + DateTime.Now.ToString();
+        }
+
+        [HttpGet("secrets", Name = "Secrets")]
+        public string ShowSecrets(IHostEnvironment env) 
+        {
+            const string key = "DefaultConnection";
+            logger.LogDebug($"danger zone - spilling secrets. Env: {env.EnvironmentName}");
+            
+            //IConfigurationSection dbSettings = configuration.GetSection("ConnectionStrings");
+            var dbConn = configuration.GetConnectionString(key);
+            
+            return $"Database: {key} = '{dbConn}' Env:{env.EnvironmentName}";
         }
     }
 }

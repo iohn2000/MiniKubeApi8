@@ -22,4 +22,19 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: {{ .Values.weatherPod.podPort }}
+              protocol: TCP
+          volumeMounts:
+          - name: appsettings-volume
+            mountPath: "/app/appsettings.local.json"
+            subPath: appsettings.Uat.json
+            readOnly: true
+          env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: {{ .Values.environment }}
+      volumes:
+      - name: appsettings-volume
+        secret:
+          secretName: appsettings-secret
+
+

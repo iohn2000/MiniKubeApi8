@@ -7,9 +7,8 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.port }}
+    - port: {{ .Values.service.servicePort }}
+      targetPort: {{ .Values.weatherPod.podPort }}
       protocol: TCP
-      nodePort: 30001
   selector:
     {{- include "helm.selectorLabels" . | nindent 4 }}
