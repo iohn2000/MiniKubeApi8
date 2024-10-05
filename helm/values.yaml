@@ -9,6 +9,7 @@ image:
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+environment: Uat
 
 service:
   type: ClusterIP

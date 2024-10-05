@@ -33,15 +33,15 @@ namespace MiniKubeApi8.Controllers
         }
 
         [HttpGet("secrets", Name = "Secrets")]
-        public string ShowSecrets() 
+        public string ShowSecrets(IHostEnvironment env) 
         {
             const string key = "DefaultConnection";
-            logger.LogDebug("danger zone - spilling secrets.");
+            logger.LogDebug($"danger zone - spilling secrets. Env: {env.EnvironmentName}");
             
             //IConfigurationSection dbSettings = configuration.GetSection("ConnectionStrings");
             var dbConn = configuration.GetConnectionString(key);
             
-            return $"Database: {key} = '{dbConn}'";
+            return $"Database: {key} = '{dbConn}' Env:{env.EnvironmentName}";
         }
     }
 }
