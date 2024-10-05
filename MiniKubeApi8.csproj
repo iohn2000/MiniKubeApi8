@@ -27,10 +27,4 @@
     <Folder Include="cd\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="tmp\appsettings.Uat.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
