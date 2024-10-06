@@ -1,18 +1,27 @@
 namespace MiniKubeApi8;
 public class Program
 {
-    private static readonly string[] swaggerEnabledEnvironments = new string[] { "Uat", "Development" };
+    private static readonly string[] swaggerEnabledEnvironments = new string[] { "uat", "Development","prod" };
 
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        // Configure logging
+        builder.Logging.ClearProviders();
+        builder.Logging.AddConsole();
+
+        var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+        ILogger<Program> logger = loggerFactory.CreateLogger<Program>();
 
         var env = builder.Environment;
 
+        string appSettingsFileEnv = $"appsettings.{env.EnvironmentName}.json";
+        logger.LogInformation($"appSettingsFileEnv: {appSettingsFileEnv}");
+
         builder.Configuration
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .AddJsonFile("appsettings.local.json", optional: false, reloadOnChange: true)
+            .AddJsonFile(appSettingsFileEnv, optional: false, reloadOnChange: true)
             .AddEnvironmentVariables();
 
         // Add services to the container.
@@ -39,6 +48,6 @@ public class Program
         app.MapControllers();
 
         app.Run();
-        Console.WriteLine("");
+        Console.WriteLine("app.Run");
     }
 }

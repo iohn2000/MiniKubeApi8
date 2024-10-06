@@ -36,7 +36,7 @@ namespace MiniKubeApi8.Controllers
         public string ShowSecrets(IHostEnvironment env) 
         {
             const string key = "DefaultConnection";
-            logger.LogDebug($"danger zone - spilling secrets. Env: {env.EnvironmentName}");
+            logger.LogInformation($"danger zone - spilling secrets. Env: {env.EnvironmentName}");
             
             //IConfigurationSection dbSettings = configuration.GetSection("ConnectionStrings");
             var dbConn = configuration.GetConnectionString(key);
