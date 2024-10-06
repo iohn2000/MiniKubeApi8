@@ -26,8 +26,8 @@ spec:
               protocol: TCP
           volumeMounts:
           - name: appsettings-volume
-            mountPath: "/app/appsettings.local.json"
-            subPath: appsettings.Uat.json
+            mountPath: {{ printf "/app/appsettings.%s.json" .Values.environment }}
+            subPath: {{ printf "secret-%s-config.json" .Values.environment }}
             readOnly: true
           env:
           - name: ASPNETCORE_ENVIRONMENT
@@ -35,6 +35,6 @@ spec:
       volumes:
       - name: appsettings-volume
         secret:
-          secretName: appsettings-secret
+          secretName: {{ printf "appsettings-secret-%s" .Values.environment }}
 
 
