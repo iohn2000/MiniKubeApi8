@@ -17,7 +17,7 @@ service:
   # targetPort = weatherPod.podPort  # service will forward traffice to this port for to a pod
 
 weatherPod:
-  podPort: 8080 # pod will listen on this port for incoming traffic (service:targetPort nees to match)
+  podPort: 8080 # pod will listen on this port for incoming traffic (service:targetPort needs to match)
 
 ingress:
   enabled: true
